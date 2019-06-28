@@ -1,0 +1,67 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz-3dplot}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{graphicx}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.shapes}
+\usetikzlibrary{angles,arrows,automata,positioning,backgrounds,calc,fadings,quotes}	
+\usetikzlibrary{shapes,fit,petri}
+
+        \definecolor{deepskyblue}{cmyk}{1,0.25,0.0,0}
+        \definecolor{picassoblue}{cmyk}{0.99,0.53,0.0,0.1}
+        
+        \definecolor{neonpink}{cmyk}{0,0.57,0.22,0}
+        \definecolor{broadwaypink}{cmyk}{0,1,0.5,0} 
+        
+        \definecolor{darkorchid1}{cmyk}{0.25,0.76,0,0.2}
+        \definecolor{purple1}{cmyk}{0.45,0.89,0,0}
+
+\begin{document}
+\tdplotsetmaincoords{60}{120}
+
+\newcommand{\Prho}{.8}%
+\newcommand{\Ptheta}{55}%
+\newcommand{\Pphi}{60}%
+
+\begin{tikzpicture}
+    [scale=3,
+    tdplot_main_coords,
+    axis/.style={->,black,thick},
+    vector/.style={->,green!75!blue,very thick},
+    vector guide/.style={dashed,deepskyblue,thick}]
+
+%standard tikz coordinate definition using x, y, z coords
+\coordinate (O) at (0,0,0);
+
+%tikz-3dplot coordinate definition using r, theta, phi coords
+\tdplotsetcoord{P}{\Prho}{\Ptheta}{\Pphi}
+
+%draw axes
+\draw[axis,black,>=stealth'] (0,0,0) -- (1,0,0) node[anchor=north east]{$x_1$};
+\draw[axis,black,>=stealth'] (0,0,0) -- (0,1,0) node[anchor=north west]{$x_2$};
+\draw[axis,black,>=stealth'] (0,0,0) -- (0,0,1) node[anchor=south]{$x_3$};
+
+%draw a vector from O to P
+\draw[vector,>=stealth'] (O) -- (P);
+
+%draw guide lines to components
+\draw[vector guide,green!75!blue] (O) -- (Pxy);
+\draw[vector guide,purple1] (Pxy) -- (P);
+
+% Compute x,y,z
+\pgfmathsetmacro{\PxCoord}{\Prho * sin(\Pphi) * cos(\Ptheta)}%
+\pgfmathsetmacro{\PyCoord}{\Prho * sin(\Pphi) * sin(\Ptheta)}%
+\pgfmathsetmacro{\PzCoord}{\Prho * cos(\Pphi)}%
+
+\draw[vector guide, deepskyblue] (Pxy) -- (Px);
+\draw[vector guide, broadwaypink!50!magenta] (Pxy) -- (Py);
+
+
+\end{tikzpicture}
+\end{document}

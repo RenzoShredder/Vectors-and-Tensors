@@ -1,0 +1,73 @@
+\documentclass[tikz, border=3p]{standalone}
+\usepackage{tikz-3dplot}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{pgfplots}
+\usepackage{bm}
+\usepackage{graphicx}
+
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.shapes}
+\usetikzlibrary{angles,automata,positioning,backgrounds,calc,fadings,quotes}	
+\usetikzlibrary{arrows,arrows.mets}
+\usetikzlibrary{shapes,fit,petri}
+
+    \definecolor{deepskyblue}{cmyk}{1,0.25,0.0,0}
+    \definecolor{picassoblue}{cmyk}{0.99,0.53,0.0,0.1}
+    \definecolor{kelly}{cmyk}{0.59,0,0.64,0.27}
+    \definecolor{wales}{cmyk}{0.63,0,0.64,0.21}
+    \definecolor{green3}{cmyk}{1,0,1,0.2}
+    \definecolor{orange}{cmyk}{0,0.35,1,0}
+    \definecolor{neonpink}{cmyk}{0,0.57,0.22,0}
+    \definecolor{broadwaypink}{cmyk}{0,1,0.5,0} 
+    \definecolor{violetflower}{cmyk}{0.25,0.63,0,0}
+    \definecolor{darkorcid}{cmyk}{0.25,0.76,0,0.20}
+        
+        \tikzstyle{particle} = [circle, thick, left color = deepskyblue!85, right color = picassoblue!85,font=\sffamily\large\bfseries,shade border west to east=deepskyblue to picassoblue]
+        
+        \tikzstyle{particle} = [circle, thick, left color = violetflower!85, right color = darkorcid!85,font=\sffamily\large\bfseries]
+
+	\makeatletter
+	\newif\iftikz@shading@path
+%start tikzset code -------------------------
+\tikzset{
+    shade border west to east/.style args={#1 to #2}{
+        preaction={draw, thick, path fading=east, #1},
+        preaction={draw, thick, path fading=west, #2},
+        postaction={draw,thick, path fading=east, #1},
+        postaction={draw,thick,path fading=west,#2}
+    },
+    shade fill west to east/.style args={#1 to #2}{
+        left color=#1,
+        right color=#2
+    }}   
+%--end tikzset code----------------------------
+
+\begin{document}
+\begin{tikzpicture}[>=stealth']
+
+    \pgfmathsetmacro{\cubex}{2}
+    \pgfmathsetmacro{\cubey}{1}
+    \pgfmathsetmacro{\cubez}{1}
+    
+    \draw[picassoblue,thick,fill=grey,opacity=0.25] (0,0,0) -- ++(-\cubex,0,0) -- 
+        ++(0,-\cubey,0) -- ++(\cubex,0,0) -- cycle;
+    \draw[picassoblue,thick,fill=grey,opacity=0.25] (0,0,0) -- ++(0,0,-\cubez) -- ++(0,-\cubey,0) --             ++(0,0,\cubez) -- cycle;
+    \draw[picassoblue,thick,fill=grey,opacity=0.25] (0,0,0) -- ++(-\cubex,0,0) -- ++(0,0,-\cubez) --             ++(\cubex,0,0) -- cycle;
+    
+    \draw[dotted,picassoblue!75,thick] (-\cubex,0,-\cubez) -- ++(0,-\cubey,0) -- 
+        ++(0,0,\cubez);
+    \draw[dotted,picassoblue!75,thick] (-\cubex,0,-\cubez) -- ++(0,-\cubey,0) -- 
+        ++(\cubex,0,0);
+    
+    \coordinate (origin) at (-1,-0.75,-0.5); 
+    
+    \draw [->,black] (origin) -- (-0.5,-0.75,-0.5) node [above,font=\small,scale=0.33] {$y$};
+    \draw [->,black] (origin) -- (-1,-0.25,-0.5) node [below left,font=\small,scale=0.33] {$z$};
+    \draw [->,black] (origin) -- (-1,-0.75,0.33) node [ left,font=\small,scale=0.33] {$x$};
+    
+    \node[particle, node distance=0.5cm,scale=0.4] (origin) at (origin);
+\end{tikzpicture}
+\end{document}

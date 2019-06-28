@@ -1,0 +1,57 @@
+\documentclass[tikz]{standalone}
+%Preamble 
+    \usetikzlibrary{arrows,automata,positioning,backgrounds,calc,fadings}
+    \usetikzlibrary{decorations.shapes}
+    \usetikzlibrary{shapes,arrows,automata,positioning,fit,backgrounds,petri}
+    \usetikzlibrary{fadings,decorations.pathmorphing}
+    
+	\usepackage{amsmath,amssymb}
+	\usepackage{color}
+	\usepackage[version=4]{mhchem} 
+	\usepackage{bm}
+	\usepackage{verbatim}
+	\usetikzlibrary{arrows,shapes}
+	\usepackage{subfig}
+	
+	\makeatletter
+	\newif\iftikz@shading@path
+%start tikzset code -------------------------
+\tikzset{
+    shade border west to east/.style args={#1 to #2}{
+        preaction={draw, thick, path fading=east, #1},
+        preaction={draw, thick, path fading=west, #2},
+        postaction={draw,thick, path fading=east, #1},
+        postaction={draw,thick,path fading=west,#2}
+    },
+    shade fill west to east/.style args={#1 to #2}{
+        left color=#1,
+        right color=#2
+    }}   
+%--end tikzset code----------------------------
+%start tikzstyle code
+ \definecolor{deepskyblue}{cmyk}{1,0.25,0.0,0}
+ \definecolor{picassoblue}{cmyk}{0.99,0.53,0.0,0.1}
+ \definecolor{kelly}{cmyk}{0.59,0,0.64,0.27}
+ \definecolor{wales}{cmyk}{0.63,0,0.64,0.21}
+ \definecolor{green3}{cmyk}{1,0,1,0.2}
+ \definecolor{orange}{cmyk}{0,0.35,1,0}
+ \definecolor{neonpink}{cmyk}{0,0.57,0.22,0}
+\definecolor{broadwaypink}{cmyk}{0,1,0.5,0} 
+
+\tikzstyle{green_blue} = [circle, thick, left color = deepskyblue, right color = wales,font=\sffamily\large\bfseries,shade border west to east=picassoblue to green3!66!yellow]
+%-end tikzstyle code -------------------------
+\begin{document}
+% Declare layers
+%-end tikzstyle code ----------------
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+%Create Figure A 
+%-end tikzstyle code ----------------
+\begin{tikzpicture}[>=stealth',shorten >=0pt,auto,node distance=3cm,main node/.style={circle,thick, fill=white,scale=0.55,draw,font= 
+	\sffamily\large\bfseries}]
+	
+	\coordinate (0) at (5,5);
+	
+	\node[green_blue, scale=0.66] (0) at (0) {\textcolor{black}{}};
+\end{tikzpicture}
+\end{document} 
